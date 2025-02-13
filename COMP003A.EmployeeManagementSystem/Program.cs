@@ -20,11 +20,11 @@ namespace COMP003A.EmployeeManagementSystem
             Departments myIT_Department = new ITDepartment();
 
             myHR_Department.DisplayDepartmentInfo();
-            Console.WriteLine($"Department: {myHR_Department.GetDepartmentDetails}");
+            Console.WriteLine($"{myHR_Department.detail}");
             ((IDepartmentOperations)myHR_Department).Operate();
 
             myIT_Department.DisplayDepartmentInfo();
-            Console.WriteLine($"Department: {myIT_Department.GetDepartmentDetails}");
+            Console.WriteLine($"{myIT_Department.detail}");
             ((IDepartmentOperations)myIT_Department).Operate();
         }
     }
@@ -115,7 +115,7 @@ namespace COMP003A.EmployeeManagementSystem
             string middleName = Console.ReadLine();
             Console.Write("Enter Last Name: ");
             string lastName = Console.ReadLine();
-            Console.Write("Enter Salary: \n");
+            Console.Write("Enter Salary: ");
             double salary = double.Parse(Console.ReadLine());
 
             Console.WriteLine("Employee created successfully!\n");
@@ -137,7 +137,8 @@ namespace COMP003A.EmployeeManagementSystem
     abstract class Departments
     {
         public string Name{ get; set; }
-        public abstract string GetDepartmentDetails();
+        public string detail { get; set; }
+        
         public void DisplayDepartmentInfo()
         {
             Console.WriteLine($"Department: {Name}");
@@ -148,50 +149,32 @@ namespace COMP003A.EmployeeManagementSystem
 
     class HRDepartment : Departments, IDepartmentOperations
     {
-        public string HR_Department { get; set; }
-        /// <summary>
-        /// constructor for getdepartmentdetails
-        /// </summary>
-        /// <param name="HR_Department"></param>
-        public HRDepartment (string HR_Department)
+        public HRDepartment ()
         {
-            Name = "HR Department";
-        }
-        public override string GetDepartmentDetails()
-        {
-            return HR_Department;
-            Console.WriteLine($"Details: Handles employee relations and recruitment.");
+            Name = "Human Resources";
+            detail = "Details: Handles employee relations and recruitment.";
         }
 
         public void Operate()
         {
             
-            Console.WriteLine("Performing HR Operations ..");
+            Console.WriteLine("Performing HR Operations ..\n");
         }
     }
 
     class ITDepartment : Departments, IDepartmentOperations
     {
-        public string IT_Department { get; set; }
-        /// <summary>
-        /// constructor for getdepartmentdetails
-        /// </summary>
-        /// <param name="IT_Department"></param>
-        public ITDepartment(string IT_Department)
+        public ITDepartment()
         {
-            Name = "IT Department";
+            Name = "IT";
+            detail = "Details: Manages technical resources and infrastructure.";
 
-        }
-        public override  string GetDepartmentDetails()
-        {
-            return IT_Department;
-            Console.WriteLine($"Details: Manages technical resources and infrasture.");
         }
 
         public void Operate()
         {
             
-            Console.WriteLine("Performing IT Operations ..");
+            Console.WriteLine("Performing IT Operations ..\n");
         }
     }
 
