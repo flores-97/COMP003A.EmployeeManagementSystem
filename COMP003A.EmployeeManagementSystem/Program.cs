@@ -109,16 +109,58 @@ namespace COMP003A.EmployeeManagementSystem
         {
             Console.Write("Enter Employee ID: ");
             string employeeId = Console.ReadLine();
-            Console.Write("Enter First Name: ");
-            string firstName = Console.ReadLine();
+
+            while (true) 
+            {
+                try
+                {
+                    Console.Write("Enter First Name: ");
+                    string firstName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(firstName)) throw new Exception("First name cannot be blank.");
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}\nPlease try agian.\n");
+                }
+            }
+
             Console.Write("Enter Middle Name (Press enter to Skip): ");
             string middleName = Console.ReadLine();
-            Console.Write("Enter Last Name: ");
-            string lastName = Console.ReadLine();
-            Console.Write("Enter Salary: ");
-            double salary = double.Parse(Console.ReadLine());
 
-            Console.WriteLine("Employee created successfully!\n");
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter Last Name: ");
+                    string lastName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(lastName)) throw new Exception("Last name cannot be blank.");
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}\nPlease try agian.\n");
+                }
+            }
+
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter Salary: ");
+                    double salary = int.Parse(Console.ReadLine());
+                    if (salary <= 0) throw new Exception("Salary cannot be below or 0.");
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}\nPlease try agian.\n");
+                }
+            }
+
+
+
+                Console.WriteLine("Employee created successfully!\n");
         }
 
         public void DisplayEmployeeInfo()
