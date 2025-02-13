@@ -157,10 +157,7 @@ namespace COMP003A.EmployeeManagementSystem
                     Console.WriteLine($"{ex.Message}\nPlease try agian.\n");
                 }
             }
-
-
-
-                Console.WriteLine("Employee created successfully!\n");
+                Console.WriteLine("\nEmployee created successfully!\n");
         }
 
         public void DisplayEmployeeInfo()
