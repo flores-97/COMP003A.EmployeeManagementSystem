@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace COMP003A.EmployeeManagementSystem
 {
-    internal class EmployeeList
+    interface IDepartmentOperations
     {
-
+        void Operate();
     }
 }

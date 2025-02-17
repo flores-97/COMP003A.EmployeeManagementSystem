@@ -10,107 +10,15 @@ namespace COMP003A.EmployeeManagementSystem
         {
             //creates new employee
             Employee myEmployee = new Employee("E001", "Alice", "Marie", "Johnson", 75000);
-            myEmployee.EmployeeInfo();
-
-            //display fields to enter employee info
-            myEmployee.DisplayEmployeeInfo();
-
-            //display department details
-            Departments myHR_Department = new HRDepartment();
-            Departments myIT_Department = new ITDepartment();
-
-            myHR_Department.DisplayDepartmentInfo();
-            Console.WriteLine($"{myHR_Department.detail}");
-            ((IDepartmentOperations)myHR_Department).Operate();
-
-            myIT_Department.DisplayDepartmentInfo();
-            Console.WriteLine($"{myIT_Department.detail}");
-            ((IDepartmentOperations)myIT_Department).Operate();
-        }
-    }
-
-    class Employee
-    {
-        //fields 
-        private string _employeeId;
-        private string _firstName;
-        private string _middleName;
-        private string _lastName;
-        private double _salary;
-
-        //properties
-
-        ///<summary>
-        ///get employee id, first, middle, last names
-        /// </summary>
-        public string EmployeeId
-        {
-            get { return _employeeId; }
-        }
-
-        public string firstName
-        {
-            get { return _firstName; } 
-            set { _firstName = value; }
-        }  
-
-        public string lastName
-        { 
-            get { return _lastName; }
-            set { _lastName = value; }
-        }
-
-        public string middleName
-        {   
-            get { return _middleName; }
-            set
-            { 
-                if ( string.IsNullOrWhiteSpace(default));
-                else
-                 _middleName = value; 
-            }   
-        }
 
 
-        /// <summary>
-        /// gets or sets salary with validation 
-        /// </summary>
-        public double salary
-        {
-            get { return _salary; }
-            set
-            {
-                if (value <= 0)
-                {
-                    _salary = value;
-                }
-            }
-        }
-
-        ///<summary>
-        ///default constructor
-        /// </summary>
-        /// <param name="employeeId"></param>
-        /// <param name="firstName"></param>
-        /// <param name="middleName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="salary"></param>
-        public Employee(string employeeId, string firstName, string middleName, string lastName, double salary)
-        {
-            _employeeId = employeeId;
-            _firstName = firstName;
-            _middleName = middleName;
-            _lastName = lastName;
-            _salary = salary;
-        }
 
 
-        public void EmployeeInfo()
-        {
+
             Console.Write("Enter Employee ID: ");
-            string employeeId = Console.ReadLine();
+            string EmployeeId = Console.ReadLine();
 
-            while (true) 
+            while (true)
             {
                 try
                 {
@@ -125,8 +33,15 @@ namespace COMP003A.EmployeeManagementSystem
                 }
             }
 
-            Console.Write("Enter Middle Name (Press enter to Skip): ");
-            string middleName = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(default))
+                {
+                    Console.Write("Enter Middle Name (Press enter to Skip): ");
+                    string middleName = Console.ReadLine();
+                    break;
+                }
+            }
 
             while (true)
             {
@@ -157,68 +72,24 @@ namespace COMP003A.EmployeeManagementSystem
                     Console.WriteLine($"{ex.Message}\nPlease try agian.\n");
                 }
             }
-                Console.WriteLine("\nEmployee created successfully!\n");
-        }
 
-        public void DisplayEmployeeInfo()
-        {
-            Console.WriteLine($"Employee ID: {EmployeeId}");
-            PrintFullnName();
-            Console.WriteLine($"Salary: {salary:C}\n");
-        }
+            Console.WriteLine("\nEmployee created successfully!\n");
 
-        public void PrintFullnName()
-        {
-            Console.WriteLine($"Name: {firstName} {middleName} {lastName}");
-        }
-    }
+            //display fields to enter employee info
 
-    abstract class Departments
-    {
-        public string Name{ get; set; }
-        public string detail { get; set; }
-        
-        public void DisplayDepartmentInfo()
-        {
-            Console.WriteLine($"Department: {Name}");
-        }
+            myEmployee.DisplayEmployeeInfo();
 
-    }
-    //represents HRDepartment derived from Departments
+            //display department details
+            Departments myHR_Department = new HRDepartment();
+            Departments myIT_Department = new ITDepartment();
 
-    class HRDepartment : Departments, IDepartmentOperations
-    {
-        public HRDepartment ()
-        {
-            Name = "Human Resources";
-            detail = "Details: Handles employee relations and recruitment.";
-        }
+            myHR_Department.DisplayDepartmentInfo();
+            Console.WriteLine($"{myHR_Department.detail}");
+            ((IDepartmentOperations)myHR_Department).Operate();
 
-        public void Operate()
-        {
-            
-            Console.WriteLine("Performing HR Operations ..\n");
-        }
-    }
-
-    class ITDepartment : Departments, IDepartmentOperations
-    {
-        public ITDepartment()
-        {
-            Name = "IT";
-            detail = "Details: Manages technical resources and infrastructure.";
-
-        }
-
-        public void Operate()
-        {
-            
-            Console.WriteLine("Performing IT Operations ..\n");
-        }
-    }
-
-    interface IDepartmentOperations
-    {
-        void Operate();
+            myIT_Department.DisplayDepartmentInfo();
+            Console.WriteLine($"{myIT_Department.detail}");
+            ((IDepartmentOperations)myIT_Department).Operate();
+        }    
     }
 }
